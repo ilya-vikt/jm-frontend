@@ -1,12 +1,27 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
-
 <template>
-  <AppLayout>
-    <RouterView />
-  </AppLayout>
+  <div
+    class="container"
+    :class="{
+      'is-desktop': isDesktop,
+      'is-laptop': isLaptop,
+      'is-tablet': isTablet,
+      'is-mobile': isMobile,
+      'is-compact': isCompact
+    }"
+  >
+    <AppLayout>
+      <RouterView />
+    </AppLayout>
+  </div>
 </template>
+
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { useBreackpoints } from '@/share/composable/useBreackpoints';
+
+const { isCompact, isDesktop, isLaptop, isMobile, isTablet } = useBreackpoints();
+</script>
 
 <style lang="scss">
 @import './assets/styles/style.scss';
