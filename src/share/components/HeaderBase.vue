@@ -39,12 +39,12 @@ onMounted(() => {
     background-color: var(--cl-block);
     border-bottom: 1px solid var(--cl-border);
 
-    @media (max-width: ($containerMaxWidth)) {
+    @media (max-width: ($container-max-width)) {
       padding-right: calc($padding-h + var(--scrollbar-compensation));
     }
   }
 
-  @media (max-width: ($containerMaxWidth)) {
+  @media (max-width: ($container-max-width)) {
     padding-right: 0;
   }
 }
