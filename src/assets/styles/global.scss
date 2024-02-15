@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  --scrollbar-compensation: 0px;
+  --header-height: 0px;
+}
+body {
+  min-height: 100vh;
+  padding-right: calc(var(--scrollbar-compensation) - (100vw - 100%));
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--cl-bg);
+  color: var(--cl-text);
+}
+
+.h3 {
+  font-size: 2rem;
+  color: var(--cl-title);
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+
+.container {
+  max-width: $containerMaxWidth;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.main {
+  padding: $padding-v $padding-h;
+  padding-top: calc(var(--header-height) + $padding-v);
+}

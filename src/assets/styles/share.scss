@@ -1,0 +1,23 @@
+$padding-v: 15px;
+$padding-h: 15px;
+$border-radius: 10px;
+$containerMaxWidth: 1920px;
+$animation: 250ms ease-out;
+
+%hover-effect {
+  background-color: var(--cl-hover);
+  color: var(--cl-text-hover);
+}
+
+@mixin mouse-hover-effect {
+  transition:
+    background-color $animation,
+    color $animation;
+  @media (hover: hover) {
+    &:hover:not(button:disabled) {
+      @content;
+      background-color: var(--cl-hover);
+      color: var(--cl-text-hover);
+    }
+  }
+}
