@@ -1,29 +1,26 @@
 <template>
-  <component
-    :is="to ? RouterLink : 'button'"
-    :to="to"
-    class="jm-button"
-    :class="{
-      'jm-button--vertical': vertical,
-      'jm-button--bordered': hasBorder,
-      'jm-button--has-hover': hasHover,
-      'jm-button--pushed': pushed
-    }"
-  >
+  <div>
     <component
-      :is="icon"
-      v-if="icon"
-      :width="iconSize"
-      :height="iconSize"
-      class="jm-button__icon"
-    />
-    <span
-      v-if="$slots.default"
-      class="jm-button__content"
+      :is="to ? RouterLink : 'button'"
+      :to="to"
+      class="jm-button"
+      :class="{
+        'jm-button--vertical': vertical,
+        'jm-button--bordered': hasBorder,
+        'jm-button--has-hover': hasHover,
+        'jm-button--pushed': pushed
+      }"
     >
+      <component
+        :is="icon"
+        v-if="icon"
+        :width="iconSize"
+        :height="iconSize"
+        class="jm-button__icon"
+      />
       <slot />
-    </span>
-  </component>
+    </component>
+  </div>
 </template>
 
 <script setup lang="ts">
