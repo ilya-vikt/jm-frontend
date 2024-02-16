@@ -10,15 +10,20 @@ $gap-base: 10px;
   color: var(--cl-text-hover);
 }
 
+@mixin mouse-hover() {
+  @media (hover: hover) {
+    &:hover:not(button:disabled) {
+      @content;
+    }
+  }
+}
+
 @mixin mouse-hover-effect {
   transition:
     background-color $animation,
     color $animation;
-  @media (hover: hover) {
-    &:hover:not(button:disabled) {
-      @content;
-      background-color: var(--cl-hover);
-      color: var(--cl-text-hover);
-    }
+  @include mouse-hover() {
+    background-color: var(--cl-hover);
+    color: var(--cl-text-hover);
   }
 }
