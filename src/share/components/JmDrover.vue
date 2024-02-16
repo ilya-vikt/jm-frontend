@@ -4,7 +4,7 @@
     class="drover"
     @click.self="$emit('closeDrover')"
   >
-    <div class="container">
+    <div class="drover__container container">
       <slot></slot>
     </div>
   </div>
@@ -27,5 +27,9 @@ defineEmits<{
   top: var(--header-height);
   padding: $padding-v $padding-h;
   background-color: rgba(0, 0, 0, 0.3);
+
+  &__container {
+    height: 100%;
+  }
 }
 </style>
