@@ -2,17 +2,19 @@
   <HeaderBase>
     <div class="header-default">
       <JmButton
-        :icon="CatalogIcon"
-        icon-size="24"
-        :has-border="!isCompact"
         has-hover
-        :pushed="false"
+        icon-size="24"
+        :icon="CatalogIcon"
+        :has-border="!isCompact"
+        :pushed="categoriesMenuVisible"
+        @click="toggleCategoriesMenu"
       >
         {{ isCompact ? '' : 'Каталог' }}
       </JmButton>
       <HeaderNav />
     </div>
   </HeaderBase>
+  <CategoriesMenu />
 </template>
 
 <script setup lang="ts">
@@ -22,6 +24,7 @@ import { CatalogIcon } from '@/share/components/icons';
 
 import JmButton from '@/share/components/JmButton.vue';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
+import { categoriesMenuVisible, toggleCategoriesMenu, CategoriesMenu } from '@/catalog';
 
 const { isCompact } = useBreackpoints();
 </script>
