@@ -23,10 +23,11 @@ defineEmits<{
 <style scoped lang="scss">
 .drover {
   position: fixed;
+  z-index: 10;
   inset: 0;
   top: var(--header-height);
   padding: $padding-v $padding-h;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--cl-bg);
 
   &__container {
     height: 100%;
