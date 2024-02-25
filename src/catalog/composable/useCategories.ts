@@ -30,7 +30,7 @@ const primaryTitle = computed(() => {
 //END CATEGORIES DATA
 
 //BEGIN MENU
-const categoriesMenuVisible = ref(true);
+const categoriesMenuVisible = ref(false);
 
 watchEffect(() => {
   if (!categoriesMenuVisible.value) {
