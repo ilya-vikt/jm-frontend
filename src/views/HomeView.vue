@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ProductsList } from '@/catalog';
+</script>
 
 <template>
-  <main></main>
+  <ProductsList />
 </template>
