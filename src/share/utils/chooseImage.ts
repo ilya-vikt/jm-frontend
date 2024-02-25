@@ -1,7 +1,6 @@
+import type { ImageInputDto } from '@/share/types';
 export const chooseImage = (
-  urls: string[],
-  width: number[],
-  height: number[],
+  { urls, width, height }: ImageInputDto,
   targetWidth?: number,
   targetHeight?: number
 ) => {
@@ -10,6 +9,10 @@ export const chooseImage = (
 
   const max = urls.length;
   for (let i = 0; i < max; i++) {
+    if ((targetWidth && width[i] < targetWidth) || (targetHeight && height[i] < targetHeight)) {
+      continue;
+    }
+
     let currentValue = 0;
     if (targetWidth) {
       currentValue += Math.abs(width[i] - targetWidth);
