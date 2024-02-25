@@ -1,14 +1,11 @@
+import type { ImageInputDto } from '@/share/types';
+
 type Category = {
   id: number;
   parentId: number;
   priority: number;
   name: string;
-  image: {
-    alt: string;
-    urls: string[];
-    width: number[];
-    height: number[];
-  };
+  image: ImageInputDto;
   slug: string;
 };
 
