@@ -27,8 +27,7 @@ const props = defineProps<{
 
 const image = computed(() => {
   if (!props.data.image) return 'none';
-  const { urls, width, height } = props.data.image;
-  const url = chooseImage(urls, width, height, 300);
+  const url = chooseImage(props.data.image, 300);
   return `url("${url}")`;
 });
 </script>
