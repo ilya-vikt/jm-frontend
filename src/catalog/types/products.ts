@@ -11,3 +11,13 @@ type ProductBase = {
 };
 
 export type ProductCardInput = ProductBase;
+
+export type ProductByIdInput = ProductBase & {
+  gallery: ImageInputDto[];
+  features: {
+    id: number;
+    name: string;
+    value: number | boolean | string | string[];
+    type: 'LIST' | 'MULTILIST' | 'NUMBER' | 'BOOLEAN' | 'STRING';
+  }[];
+};
