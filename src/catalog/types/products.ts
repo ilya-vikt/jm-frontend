@@ -6,6 +6,7 @@ type ProductBase = {
   categoryId: number;
   description: string;
   price: number;
+  marketingPrice: number | null;
   thumb: ImageInputDto;
 };
 
