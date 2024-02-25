@@ -7,6 +7,8 @@ import UserIcon from './UserIcon.vue';
 import CatalogIcon from './CatalogIcon.vue';
 import ArrowLeftIcon from './ArrowLeftIcon.vue';
 import CloseIcon from './CloseIcon.vue';
+import ToLeftIcon from './ToLeftIcon.vue';
+import ToRightIcon from './ToRightIcon.vue';
 
 export {
   BurgerIcon,
@@ -17,5 +19,7 @@ export {
   UserIcon,
   CatalogIcon,
   ArrowLeftIcon,
-  CloseIcon
+  CloseIcon,
+  ToLeftIcon,
+  ToRightIcon
 };
