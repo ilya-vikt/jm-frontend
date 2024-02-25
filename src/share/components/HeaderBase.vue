@@ -31,6 +31,7 @@ onMounted(() => {
   top: 0;
   right: 0;
   left: 0;
+  z-index: 10;
   padding-right: var(--scrollbar-compensation);
 
   &__container {
