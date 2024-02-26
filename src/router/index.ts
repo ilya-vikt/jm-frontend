@@ -21,6 +21,15 @@ const router = createRouter({
       meta: {
         layout: Layouts.default
       }
+    },
+    {
+      path: '/about',
+      name: 'about',
+
+      component: () => import('@/about/views/AboutView.vue'),
+      meta: {
+        layout: Layouts.default
+      }
     }
   ]
 });
