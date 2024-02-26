@@ -2,6 +2,10 @@
   <CardBase class="about">
     <div class="about__inner">
       <AboutArticle />
+      <div class="about__stages">
+        <h2>Этапы выполнения работ</h2>
+        <AboutTimeline class="about__timeline" />
+      </div>
     </div>
   </CardBase>
 </template>
@@ -9,6 +13,7 @@
 <script setup lang="ts">
 import CardBase from '@/share/components/CardBase.vue';
 import AboutArticle from '@/about/blocks/AboutArticle.vue';
+import AboutTimeline from '@/about/blocks/AboutTimeline.vue';
 </script>
 
 <style scoped lang="scss">
