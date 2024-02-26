@@ -45,7 +45,7 @@
       :icon="InfoIcon"
       :icon-size="24"
       vertical
-      to="/"
+      to="/about"
       has-hover
     >
       О проекте
