@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import HomeView from '@/catalog/views/HomeView.vue';
 import { Layouts } from '@/layouts';
 import { layoutMiddleware } from './layout.middleware';
 
@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/catalog/product/:id',
       name: 'product',
-      component: () => import('../views/ProductView.vue'),
+      component: () => import('@/catalog/views/ProductView.vue'),
       meta: {
         layout: Layouts.default
       }

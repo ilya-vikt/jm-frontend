@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ProductPresentation } from '@/catalog';
+import ProductPresentation from '@/catalog/widgets/ProductPresentation.vue';
 import CardBase from '@/share/components/CardBase.vue';
 </script>
 
