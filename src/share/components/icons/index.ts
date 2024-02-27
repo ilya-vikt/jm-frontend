@@ -9,6 +9,12 @@ import ArrowLeftIcon from './ArrowLeftIcon.vue';
 import CloseIcon from './CloseIcon.vue';
 import ToLeftIcon from './ToLeftIcon.vue';
 import ToRightIcon from './ToRightIcon.vue';
+import PhoneIcon from './PhoneIcon.vue';
+import MailIcon from './MailIcon.vue';
+import TelegramIcon from './TelegramIcon.vue';
+import WhatsappIcon from './WhatsappIcon.vue';
+import ResumeIcon from './ResumeIcon.vue';
+import GithubIcon from './GithubIcon.vue';
 
 export {
   BurgerIcon,
@@ -21,5 +27,11 @@ export {
   ArrowLeftIcon,
   CloseIcon,
   ToLeftIcon,
-  ToRightIcon
+  ToRightIcon,
+  PhoneIcon,
+  MailIcon,
+  TelegramIcon,
+  WhatsappIcon,
+  ResumeIcon,
+  GithubIcon
 };

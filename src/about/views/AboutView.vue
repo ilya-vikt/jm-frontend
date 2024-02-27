@@ -6,6 +6,7 @@
         <h2>Этапы выполнения работ</h2>
         <AboutTimeline class="about__timeline" />
       </div>
+      <AboutContacts />
     </div>
   </CardBase>
 </template>
@@ -14,6 +15,7 @@
 import CardBase from '@/share/components/CardBase.vue';
 import AboutArticle from '@/about/blocks/AboutArticle.vue';
 import AboutTimeline from '@/about/blocks/AboutTimeline.vue';
+import AboutContacts from '@/about/blocks/AboutContacts.vue';
 </script>
 
 <style scoped lang="scss">
