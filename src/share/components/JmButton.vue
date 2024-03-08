@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="to ? RouterLink : 'button'"
+    :is="buttonType"
     :to="to"
     class="jm-button"
     :class="{
@@ -33,6 +33,8 @@ const props = withDefaults(
     hasBorder?: boolean;
     hasHover?: boolean;
     pushed?: boolean;
+    disabled?: boolean;
+    decorative?: boolean;
     justify?: 'left' | 'center' | 'right';
   }>(),
   {
@@ -44,6 +46,12 @@ const justify = computed(() => {
   if (props.justify === 'left') return 'flex-start';
   if (props.justify === 'right') return 'flex-end';
   return 'center';
+});
+
+const buttonType = computed(() => {
+  if (props.decorative) return 'div';
+  if (props.to) return RouterLink;
+  return 'button';
 });
 </script>
 
