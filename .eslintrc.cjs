@@ -1,12 +1,13 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
   rules: {
     'vue/attributes-order': 'error',
     '@typescript-eslint/no-unused-vars': 'warn',
-    'prefer-const': 'warn'
+    'prefer-const': 'warn',
+    'no-prototype-builtins': 'off'
   },
   extends: [
     'plugin:vue/vue3-essential',
@@ -17,4 +18,4 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest'
   }
-}
+};
