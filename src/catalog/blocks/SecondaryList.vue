@@ -5,7 +5,10 @@
       :key="category.id"
       class="secondary-list__item"
     >
-      <SecondaryCategory :data="category" />
+      <SecondaryCategory
+        :data="category"
+        @click="closeDrover"
+      />
     </li>
   </ul>
 </template>
@@ -13,8 +16,10 @@
 <script setup lang="ts">
 import SecondaryCategory from '@/catalog/components/SecondaryCategory.vue';
 import { useCategories } from '@/catalog/composable/useCategories';
+import { useDroverController } from '@/share/composable/useDroverController';
 
 const { secondaryCategories } = useCategories();
+const { closeDrover } = useDroverController();
 </script>
 
 <style scoped lang="scss">
