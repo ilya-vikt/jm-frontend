@@ -23,6 +23,32 @@ const router = createRouter({
       }
     },
     {
+      path: '/catalog/:primaryCategory/:secondaryCategory',
+      name: 'secondaryCategory',
+      component: () => import('@/catalog/views/SearchProductsView.vue'),
+      meta: {
+        layout: Layouts.default
+      }
+    },
+    {
+      path: '/catalog/:primaryCategory',
+      name: 'primaryCategory',
+
+      component: () => import('@/catalog/views/SearchProductsView.vue'),
+      meta: {
+        layout: Layouts.default
+      }
+    },
+    {
+      path: '/catalog',
+      name: 'cagalog',
+
+      component: () => import('@/catalog/views/SearchProductsView.vue'),
+      meta: {
+        layout: Layouts.default
+      }
+    },
+    {
       path: '/about',
       name: 'about',
 
