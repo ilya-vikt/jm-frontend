@@ -1,16 +1,9 @@
 <template>
   <HeaderBase>
     <div class="header-default">
-      <JmButton
-        has-hover
-        icon-size="24"
-        :icon="CatalogIcon"
-        :has-border="!isCompact"
-        :pushed="categoriesMenuVisible"
-        @click="toggleCategoriesMenu"
-      >
-        {{ isCompact ? '' : 'Каталог' }}
-      </JmButton>
+      <CategoriesMenuButton class="header-default__catalog" />
+      <FiltersButton />
+      <SearchBar class="header-default__search-bar" />
       <HeaderNav />
     </div>
   </HeaderBase>
@@ -20,21 +13,33 @@
 <script setup lang="ts">
 import HeaderBase from '@/share/components/HeaderBase.vue';
 import HeaderNav from '@/share/blocks/HeaderNav.vue';
-import { CatalogIcon } from '@/share/components/icons';
-
-import JmButton from '@/share/components/JmButton.vue';
-import { useBreackpoints } from '@/share/composable/useBreackpoints';
-import { categoriesMenuVisible, toggleCategoriesMenu, CategoriesMenu } from '@/catalog';
-
-const { isCompact } = useBreackpoints();
+import { CategoriesMenu, SearchBar, CategoriesMenuButton, FiltersButton } from '@/catalog';
 </script>
 
 <style scoped lang="scss">
 .header-default {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: clamp(300px, 30%, 500px) 1fr auto;
   align-items: center;
   gap: $gap-base;
   min-height: 70px;
+
+  &__catalog {
+    justify-self: start;
+  }
+}
+
+.is-laptop .header-default {
+  grid-template-columns: auto 1fr auto;
+}
+
+.is-compact {
+  .header-default {
+    display: flex;
+
+    &__search-bar {
+      flex-grow: 1;
+    }
+  }
 }
 </style>
