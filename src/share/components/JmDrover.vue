@@ -1,23 +1,49 @@
 <template>
   <div
-    v-if="visible"
-    class="drover"
+    v-if="droversStates[droverName] || disabled"
+    :class="{
+      drover: !disabled
+    }"
     @click.self="$emit('closeDrover')"
   >
-    <div class="drover__container container">
-      <slot></slot>
+    <div :class="{ 'drover__container container': !disabled }">
+      <slot />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  visible: boolean;
-}>();
+import { watch } from 'vue';
+import { useDroverController } from '@/share/composable/useDroverController';
+
+const { registerDrover, unregisterDrover, droversStates } = useDroverController();
+
+const props = withDefaults(
+  defineProps<{
+    droverName: string;
+    disabled?: boolean;
+  }>(),
+  {
+    disabled: false
+  }
+);
+defineOptions();
 
 defineEmits<{
   closeDrover: [];
 }>();
+
+watch(
+  () => props.disabled,
+  (value) => {
+    if (value) {
+      unregisterDrover(props.droverName);
+    } else {
+      registerDrover(props.droverName);
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped lang="scss">
@@ -26,11 +52,12 @@ defineEmits<{
   z-index: 10;
   inset: 0;
   top: var(--header-height);
-  padding: $padding-v $padding-h;
   background-color: var(--cl-bg);
 
   &__container {
+    padding: $padding-v $padding-h;
     height: 100%;
+    overflow-y: auto;
   }
 }
 </style>
