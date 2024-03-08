@@ -1,18 +1,15 @@
 <template>
-  <JmDrover :visible="categoriesMenuVisible">
+  <JmDrover :drover-name="categoriesMenuDroverName">
     <div class="categories-menu">
       <CardBase
         v-if="!isCompact || (isCompact && !primaryId)"
         class="categories-menu__primary"
       >
-        <JmButton
+        <CloseDroverButton
           v-if="isCompact"
           class="categories-menu__close"
-          has-hover
-          icon-size="24"
-          :icon="CloseIcon"
-          @click="categoriesMenuVisible = false"
         />
+
         <PrimaryList />
       </CardBase>
 
@@ -29,13 +26,7 @@
             @click="primaryId = null"
           />
           <p class="categories-menu__title">{{ primaryTitle }}</p>
-          <JmButton
-            class="categories-menu__close"
-            has-hover
-            icon-size="24"
-            :icon="CloseIcon"
-            @click="categoriesMenuVisible = false"
-          />
+          <CloseDroverButton class="categories-menu__close" />
         </div>
         <SecondaryList />
       </CardBase>
@@ -49,12 +40,14 @@ import JmButton from '@/share/components/JmButton.vue';
 import CardBase from '@/share/components/CardBase.vue';
 import PrimaryList from '@/catalog/blocks/PrimaryList.vue';
 import SecondaryList from '@/catalog/blocks/SecondaryList.vue';
-import { ArrowLeftIcon, CloseIcon } from '@/share/components/icons';
+import { ArrowLeftIcon } from '@/share/components/icons';
 
 import { useCategories } from '@/catalog/composable/useCategories';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
+import { categoriesMenuDroverName } from '@/catalog/constants';
+import CloseDroverButton from '@/share/blocks/CloseDroverButton.vue';
 
-const { categoriesMenuVisible, primaryId, primaryTitle } = useCategories();
+const { primaryId, primaryTitle } = useCategories();
 const { isCompact } = useBreackpoints();
 </script>
 
