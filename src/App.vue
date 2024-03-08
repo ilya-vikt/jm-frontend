@@ -6,7 +6,8 @@
       'is-laptop': isLaptop,
       'is-tablet': isTablet,
       'is-mobile': isMobile,
-      'is-compact': isCompact
+      'is-compact': isCompact,
+      'is-ultrawide': isUltraWide
     }"
   >
     <AppLayout>
@@ -20,7 +21,7 @@ import { RouterView } from 'vue-router';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
 
-const { isCompact, isDesktop, isLaptop, isMobile, isTablet } = useBreackpoints();
+const { isCompact, isUltraWide, isDesktop, isLaptop, isMobile, isTablet } = useBreackpoints();
 </script>
 
 <style lang="scss">
