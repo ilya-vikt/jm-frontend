@@ -27,3 +27,15 @@ const { isCompact, isUltraWide, isDesktop, isLaptop, isMobile, isTablet } = useB
 <style lang="scss">
 @import './assets/styles/style.scss';
 </style>
+
+<style scoped lang="scss">
+.container {
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+}
+
+.is-ultrawide.container {
+  border-left-color: var(--cl-border);
+  border-right-color: var(--cl-border);
+}
+</style>
