@@ -68,7 +68,7 @@ const moveHandler = ({ offsetX: x, offsetY: y }: PointerEvent) => {
     display: block;
 
     img {
-      min-width: 300%;
+      min-width: 200%;
       height: auto;
       transform: translate3d(v-bind(translateX), v-bind(translateY), 0);
     }
