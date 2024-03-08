@@ -38,7 +38,7 @@ const getFeatureValue = (feature: ProductByIdInput['features'][0]) => {
 .product-features {
   &__list {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(50%, 1fr) auto;
     align-items: end;
     row-gap: $gap-base;
   }
