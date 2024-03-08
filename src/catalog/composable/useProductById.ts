@@ -1,5 +1,5 @@
 import type { ProductByIdInput } from '@/catalog/types';
-import { controllerName, endpoints } from '@/catalog/constants';
+import { endpoints } from '@/catalog/constants';
 import { useFetch } from '@vueuse/core';
 import { useRoute } from 'vue-router';
 
@@ -9,9 +9,7 @@ export const useProductById = () => {
     data: product,
     isFetching,
     error
-  } = useFetch(
-    `${import.meta.env.VITE_API_URL}/${controllerName}/${endpoints.getProductById}/${route.params['id']}`
-  ).json<ProductByIdInput | null>();
+  } = useFetch(`${endpoints.getProductById}/${route.params['id']}`).json<ProductByIdInput | null>();
   return {
     isFetching,
     error,
