@@ -1,7 +1,7 @@
 <template>
   <JmButton
     has-hover
-    :to="data.slug"
+    :to="data.url"
     class="secondary-item"
   >
     <div

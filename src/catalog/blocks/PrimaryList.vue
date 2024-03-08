@@ -6,7 +6,7 @@
     >
       <JmButton
         has-hover
-        :to="isCompact ? '' : category.slug"
+        :to="isCompact ? '' : category.url"
         justify="left"
         class="primary-list__item"
         @pointerenter="selectHandler(category.id, 'hover')"

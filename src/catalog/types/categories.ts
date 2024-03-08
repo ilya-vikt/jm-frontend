@@ -11,6 +11,6 @@ type Category = {
 
 export type CategoryInput = Category[];
 
-export type PrimaryCategory = Omit<Category, 'imageUrl' | 'parentId'>;
+export type PrimaryCategory = Omit<Category, 'imageUrl' | 'parentId'> & { url: string };
 
-export type SecondaryCategory = Category;
+export type SecondaryCategory = Category & { url: string };

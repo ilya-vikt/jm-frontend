@@ -1,6 +1,6 @@
 import type { CategoryInput, PrimaryCategory } from '@/catalog/types';
 import { controllerName, endpoints } from '@/catalog/constants';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect, readonly } from 'vue';
 import { useFetch } from '@vueuse/core';
 
 //BEGIN CATEGORIES DATA
@@ -8,43 +8,49 @@ const {
   data: categories,
   isFetching,
   error
-} = useFetch(
-  `${import.meta.env.VITE_API_URL}/${controllerName}/${endpoints.getCategories}`
-).json<CategoryInput | null>();
+} = useFetch(endpoints.getCategories).json<CategoryInput | null>();
 
-const primaryCategories = computed<PrimaryCategory[]>(
-  () => categories.value?.filter((cat) => cat.parentId === 0) ?? []
-);
+const primaryCategories = computed<PrimaryCategory[]>(() => {
+  if (!categories.value) return [];
+  const filtered = categories.value.filter((cat) => cat.parentId === 0);
+  return filtered.map((cat) => ({
+    ...cat,
+    url: `/${controllerName}/${cat.slug}`
+  }));
+});
 
 const primaryId = ref<number | null>(null);
 
-const secondaryCategories = computed(() => {
-  if (!primaryId.value) return [];
-  return categories.value?.filter((cat) => cat.parentId === primaryId.value) ?? [];
-});
+const getSecondaryCategories = (primaryId: number | null) => {
+  if (!categories.value || primaryId === null) return [];
+  const filtered = categories.value.filter((cat) => cat.parentId === primaryId);
 
+  return filtered.map((cat) => ({
+    ...cat,
+    url: `${primaryCategories.value.find((el) => el.id === cat.parentId)?.url}/${cat.slug}`
+  }));
+};
+
+const secondaryCategories = computed(() => getSecondaryCategories(primaryId.value));
 const primaryTitle = computed(() => {
   if (!primaryId.value) return '';
-  return primaryCategories.value?.find((cat) => cat.id === primaryId.value)?.name ?? '';
+  return primaryCategories.value?.find((el) => el.id === primaryId.value)?.name ?? '';
 });
-//END CATEGORIES DATA
 
-//BEGIN MENU
-const categoriesMenuVisible = ref(false);
+const currentSecondaryCategoryId = ref<number | null>(null);
+const currentPrimaryCategoryId = ref<number | null>(null);
 
-watchEffect(() => {
-  if (!categoriesMenuVisible.value) {
-    primaryId.value = null;
-  }
-});
-//END MENU
-
-export const useCategories = () => ({
-  isFetching,
-  error,
-  primaryCategories,
-  secondaryCategories,
-  categoriesMenuVisible,
-  primaryId,
-  primaryTitle
-});
+export const useCategories = () => {
+  return {
+    isFetching,
+    error,
+    primaryCategories,
+    secondaryCategories,
+    primaryId,
+    primaryTitle,
+    getSecondaryCategories,
+    categories: readonly(categories),
+    currentSecondaryCategoryId,
+    currentPrimaryCategoryId
+  };
+};
