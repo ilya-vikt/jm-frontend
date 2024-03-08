@@ -1,6 +1,6 @@
 import type { ImageInputDto } from '@/share/types';
 
-type ProductBase = {
+export type Product = {
   id: number;
   name: string;
   categoryId: number;
@@ -10,13 +10,11 @@ type ProductBase = {
   thumb: ImageInputDto;
 };
 
-export type ProductCardInput = ProductBase;
-
-export type ProductByIdInput = ProductBase & {
+export type ProductByIdInput = Product & {
   gallery: ImageInputDto[];
   features: {
     id: number;
-    name: string;
+    caption: string;
     value: number | boolean | string | string[];
     type: 'LIST' | 'MULTILIST' | 'NUMBER' | 'BOOLEAN' | 'STRING';
   }[];
