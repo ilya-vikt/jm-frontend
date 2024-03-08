@@ -1,0 +1,26 @@
+<template>
+  <JmButton
+    class="header-default__catalog"
+    has-hover
+    icon-size="24"
+    :icon="CatalogIcon"
+    :has-border="!isCompact"
+    @click="toggleCategoriesMenu"
+  >
+    {{ isCompact ? '' : 'Каталог' }}
+  </JmButton>
+</template>
+
+<script setup lang="ts">
+import { useBreackpoints } from '@/share/composable/useBreackpoints';
+import { useDroverController } from '@/share/composable/useDroverController';
+import { CatalogIcon } from '@/share/components/icons';
+import JmButton from '@/share/components/JmButton.vue';
+import { categoriesMenuDroverName } from '../constants';
+const { isCompact } = useBreackpoints();
+const { toggleDrover } = useDroverController();
+
+const toggleCategoriesMenu = () => {
+  toggleDrover(categoriesMenuDroverName);
+};
+</script>
