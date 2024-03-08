@@ -2,13 +2,14 @@
   <CardBase class="product-card">
     <div class="product-card__wrapper">
       <img
-        :src="data.thumb.urls[0]"
+        ref="productCardImg"
+        :src="chooseImage(data.thumb, 400, 400)"
         :alt="data.thumb.alt"
         class="product-card__img"
       />
     </div>
     <div class="product-card__bottom">
-      <h3 class="product-card__title h3">{{ data.name }}</h3>
+      <h3 class="product-card__title">{{ data.name }}</h3>
       <div class="product-card__prices">
         <span
           v-if="data.marketingPrice"
@@ -36,18 +37,24 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductCardInput } from '../types/products';
+import type { Product } from '@/catalog/types/products';
 import CardBase from '@/share/components/CardBase.vue';
-import { priceFormatter } from '@/share/utils';
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { chooseImage, imgLazyLoad, priceFormatter } from '@/share/utils';
 
-const props = defineProps<{ data: ProductCardInput }>();
+const props = defineProps<{ data: Product }>();
+const productCardImg = ref<HTMLImageElement | null>(null);
 
 const sale = computed(() =>
   props.data.marketingPrice
     ? `-${Math.floor(100 - (props.data.marketingPrice * 100) / props.data.price)}%`
     : ''
 );
+
+onMounted(() => {
+  if (!productCardImg.value) return;
+  imgLazyLoad(productCardImg.value);
+});
 </script>
 
 <style scoped lang="scss">
@@ -63,6 +70,7 @@ const sale = computed(() =>
     background-color: var(--cl-white);
     display: flex;
     align-items: center;
+    aspect-ratio: 1 / 1;
   }
 
   &__img {
@@ -86,7 +94,6 @@ const sale = computed(() =>
   &__prices {
     margin-bottom: 5px;
     display: flex;
-    flex-wrap: wrap;
     gap: 15px;
     font-size: 1.3rem;
     align-items: start;
