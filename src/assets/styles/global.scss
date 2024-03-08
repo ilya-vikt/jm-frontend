@@ -16,11 +16,6 @@ body {
   color: var(--cl-text);
 }
 
-.h3 {
-  font-size: 2rem;
-  color: var(--cl-title);
-}
-
 .no-scroll {
   overflow-y: hidden;
 }
@@ -57,6 +52,44 @@ h2 {
   margin-bottom: $gap-base * 1.5;
 }
 
+h3 {
+  font-size: 2rem;
+  color: var(--cl-title);
+}
+
 p {
   margin-bottom: $gap-base;
+}
+
+//loader contains styles to create a sceleton-loader and images lazy loading
+.loader {
+  background-color: var(--cl-hover);
+  animation: shine 3s linear infinite forwards;
+  animation-delay: calc(var(--idx, 0) * 300ms);
+}
+
+@keyframes shine {
+  0%,
+  100% {
+    filter: brightness(100%);
+  }
+
+  50% {
+    filter: brightness(75%);
+  }
+}
+
+.img-lazy-load {
+  img {
+    transition: opacity $animation;
+  }
+}
+
+.img-loading {
+  @extend .loader;
+
+  img {
+    transition-duration: 0s;
+    opacity: 0;
+  }
 }
