@@ -15,6 +15,10 @@ import TelegramIcon from './TelegramIcon.vue';
 import WhatsappIcon from './WhatsappIcon.vue';
 import ResumeIcon from './ResumeIcon.vue';
 import GithubIcon from './GithubIcon.vue';
+import MagnifierIcon from './MagnifierIcon.vue';
+import CheckIcon from './CheckIcon.vue';
+import NotFoundIcon from './NotFoundIcon.vue';
+import FilterIcon from './FilterIcon.vue';
 
 export {
   BurgerIcon,
@@ -33,5 +37,9 @@ export {
   TelegramIcon,
   WhatsappIcon,
   ResumeIcon,
-  GithubIcon
+  GithubIcon,
+  MagnifierIcon,
+  NotFoundIcon,
+  CheckIcon,
+  FilterIcon
 };
