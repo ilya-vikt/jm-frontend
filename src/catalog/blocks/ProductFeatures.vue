@@ -7,7 +7,7 @@
         :key="feature.id"
       >
         <dt class="product-features__feature">
-          <span>{{ feature.name }}</span>
+          <span>{{ feature.caption }}</span>
         </dt>
         <dd class="product-features__value">{{ getFeatureValue(feature) }}</dd>
       </template>
