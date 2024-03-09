@@ -105,6 +105,10 @@ const changeMinHandler = (target: HTMLInputElement) => {
         -webkit-appearance: none;
       }
 
+      &:focus-visible {
+        border-color: var(--cl-outline);
+      }
+
       @include mouse-hover {
         color: var(--cl-text-hover);
         background-color: var(--cl-hover);

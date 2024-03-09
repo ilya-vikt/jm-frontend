@@ -104,9 +104,6 @@ const setNextValue = () => {
     display: block;
     position: relative;
     z-index: 1;
-    border-radius: 5px;
-    border: 2px solid var(--cl-border);
-    overflow: hidden;
     transition: color $animation;
 
     &::after {
@@ -131,13 +128,18 @@ const setNextValue = () => {
   &__control {
     cursor: pointer;
     width: 100%;
-    outline: none;
     min-height: $control-minheight;
     background-color: var(--cl-block);
-    border: none;
     padding: 5px;
+    outline: none;
     user-select: none;
     transition: background-color $animation;
+    border: 2px solid var(--cl-border);
+    border-radius: 5px;
+
+    &:focus-visible {
+      border: 2px solid var(--cl-outline);
+    }
 
     &::placeholder {
       color: currentColor;
@@ -201,7 +203,7 @@ const setNextValue = () => {
       transition-delay: 0s, 0s;
     }
 
-    .dropdown__top {
+    .dropdown__control {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
 

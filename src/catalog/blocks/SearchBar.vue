@@ -21,7 +21,7 @@
 import JmButton from '@/share/components/JmButton.vue';
 import { MagnifierIcon } from '@/share/components/icons';
 import { useProducts } from '@/catalog/composable/useProducts';
-import { inject, onMounted, ref, type Ref } from 'vue';
+import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useFilters } from '@/catalog/composable/useFilters';
 
@@ -47,15 +47,15 @@ const changeHandler = () => {
 <style scoped lang="scss">
 .search-bar {
   display: flex;
-  border: 2px solid var(--cl-border);
-  border-radius: $border-radius;
   overflow: hidden;
 
   &__input {
     flex-grow: 1;
     background-color: var(--cl-block);
     border: none;
-    border-right: 2px solid var(--cl-border);
+    border: 2px solid var(--cl-border);
+    border-bottom-left-radius: $border-radius;
+    border-top-left-radius: $border-radius;
     padding: $padding-v $padding-h;
     outline: none;
     caret-color: var(--cl-text);
@@ -67,6 +67,10 @@ const changeHandler = () => {
       color: currentColor;
     }
 
+    &:focus-visible {
+      border-color: var(--cl-outline);
+    }
+
     @include mouse-hover {
       background-color: var(--cl-hover);
       color: var(--cl-text-hover);
@@ -74,7 +78,10 @@ const changeHandler = () => {
   }
 
   &__btn {
-    border-radius: 0;
+    border: 2px solid var(--cl-border);
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
 </style>

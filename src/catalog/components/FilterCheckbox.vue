@@ -41,8 +41,8 @@ const getCaption = () => (props.filterData as FilterData).caption ?? props.filte
   align-items: center;
   transition: color $animation;
   user-select: none;
-  border: 1px solid transparent;
   border-radius: 5px;
+  border: 2px solid transparent;
 
   &::before {
     content: '';
@@ -69,7 +69,7 @@ const getCaption = () => (props.filterData as FilterData).caption ?? props.filte
   }
 
   &:focus-visible + .checkbox-label {
-    border: 1px solid var(--cl-white);
+    border-color: var(--cl-outline);
   }
 
   @include mouse-hover {

@@ -61,6 +61,7 @@ const buttonType = computed(() => {
   justify-content: v-bind(justify);
   align-items: center;
   gap: 10px;
+  border: 2px solid transparent;
   padding: $padding-v $padding-h;
   transition:
     opacity $animation,
@@ -68,9 +69,14 @@ const buttonType = computed(() => {
     color $animation;
   border-radius: $border-radius;
   letter-spacing: inherit;
+  outline: none;
 
   &:disabled {
     opacity: 0.3;
+  }
+
+  &:focus-visible {
+    border: 2px solid var(--cl-outline);
   }
 
   &--vertical {
@@ -78,7 +84,7 @@ const buttonType = computed(() => {
   }
 
   &--bordered {
-    border: 2px solid var(--cl-border);
+    border-color: var(--cl-border);
   }
 
   &--pushed {

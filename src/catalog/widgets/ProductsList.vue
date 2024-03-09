@@ -9,7 +9,10 @@
         :key="product.id"
         class="products-list__card"
       >
-        <RouterLink :to="`${urlBase}/${product.id.toString()}`">
+        <RouterLink
+          :to="`${urlBase}/${product.id.toString()}`"
+          class="products-list__lnk"
+        >
           <ProductCard :data="product" />
         </RouterLink>
       </li>
@@ -54,6 +57,17 @@ const urlBase = `/${controllerName}/product`;
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
+  }
+
+  &__lnk {
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: $border-radius;
+    display: block;
+
+    &:focus-visible {
+      border-color: var(--cl-outline);
+    }
   }
 }
 
