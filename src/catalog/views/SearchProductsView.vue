@@ -1,6 +1,6 @@
 <template>
   <div class="products">
-    <FiltersWidget />
+    <FiltersWidget class="products__panel" />
     <div class="products__list">
       <CatalogBreadcrumbs
         v-if="!isCompact"
