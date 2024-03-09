@@ -1,9 +1,5 @@
 <template>
   <CardBase class="filters-panel">
-    <CloseDroverButton
-      v-if="isCompact"
-      class="filters-panel__close"
-    />
     <ul
       v-if="filtersValues"
       class="filters-panel__list"
@@ -72,9 +68,6 @@ import { useRoute, useRouter } from 'vue-router';
 import { useFilters } from '@/catalog//composable/useFilters';
 import { prepareFilterValue } from '@/catalog//utils';
 import { onMounted, ref, watch } from 'vue';
-import CloseDroverButton from '@/share/blocks/CloseDroverButton.vue';
-import { useBreackpoints } from '@/share/composable/useBreackpoints';
-const { isCompact } = useBreackpoints();
 const { filters } = useFilters();
 const { searchParams, getQueryParams } = useProducts();
 

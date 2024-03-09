@@ -1,9 +1,5 @@
 <template>
   <CardBase>
-    <CloseDroverButton
-      v-if="isCompact"
-      class="filters-panel__close"
-    />
     <ul>
       <li
         v-for="category in currentCategories"
@@ -26,11 +22,8 @@ import JmButton from '@/share/components/JmButton.vue';
 import { useCategories } from '@/catalog/composable/useCategories';
 import { computed } from 'vue';
 import { controllerName } from '../constants';
-import { useBreackpoints } from '@/share/composable/useBreackpoints';
-import CloseDroverButton from '@/share/blocks/CloseDroverButton.vue';
 
 const { categories, currentPrimaryCategoryId } = useCategories();
-const { isCompact } = useBreackpoints();
 
 const currentCategories = computed(() =>
   categories.value

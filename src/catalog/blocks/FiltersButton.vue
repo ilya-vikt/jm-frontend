@@ -1,6 +1,6 @@
 <template>
   <JmButton
-    v-if="isCompact && $route.params.secondaryCategory"
+    v-if="isCompact"
     class="header-default__catalog"
     has-hover
     icon-size="24"

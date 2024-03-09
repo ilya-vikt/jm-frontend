@@ -76,20 +76,22 @@ import JmButton from '@/share/components/JmButton.vue';
 <style scoped lang="scss">
 .header-nav {
   display: flex;
-
   &__burger {
     display: none;
   }
 }
 
-.is-tablet,
-.is-mobile {
-  .header-nav__lnk {
-    display: none;
-  }
+.is-compact {
+  .header-nav {
+    margin-left: auto;
 
-  .header-nav__burger {
-    display: block;
+    &__lnk {
+      display: none;
+    }
+
+    &__burger {
+      display: block;
+    }
   }
 }
 </style>

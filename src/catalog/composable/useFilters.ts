@@ -1,11 +1,11 @@
 import type { FitlersByCategoryInput } from '@/catalog/types';
 import { endpoints } from '@/catalog/constants';
 import { useCategories } from '@/catalog/composable/useCategories';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useFetch } from '@vueuse/core';
 
 const { currentSecondaryCategoryId } = useCategories();
-
+const searchBarModel = ref('');
 /**
  * @prop {string} filtersUrl contains the calculated URL for requesting filters from the backend.
  * If the URL cannot be calculated due to a missing secondaryCategory or because
@@ -31,6 +31,7 @@ const { data: filters, isFetching: isFilterFetching } = useFetch(filtersUrl, {
 export const useFilters = () => {
   return {
     filters,
-    isFilterFetching
+    isFilterFetching,
+    searchBarModel
   };
 };

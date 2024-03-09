@@ -3,7 +3,10 @@
     <div class="header-default">
       <CategoriesMenuButton class="header-default__catalog" />
       <FiltersButton />
-      <SearchBar class="header-default__search-bar" />
+      <SearchBar
+        v-if="!isCompact"
+        class="header-default__search-bar"
+      />
       <HeaderNav />
     </div>
   </HeaderBase>
@@ -14,6 +17,9 @@
 import HeaderBase from '@/share/components/HeaderBase.vue';
 import HeaderNav from '@/share/blocks/HeaderNav.vue';
 import { CategoriesMenu, SearchBar, CategoriesMenuButton, FiltersButton } from '@/catalog';
+import { useBreackpoints } from '@/share/composable/useBreackpoints';
+
+const { isCompact } = useBreackpoints();
 </script>
 
 <style scoped lang="scss">
@@ -36,10 +42,6 @@ import { CategoriesMenu, SearchBar, CategoriesMenuButton, FiltersButton } from '
 .is-compact {
   .header-default {
     display: flex;
-
-    &__search-bar {
-      flex-grow: 1;
-    }
   }
 }
 </style>

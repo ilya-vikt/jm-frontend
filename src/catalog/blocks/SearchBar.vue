@@ -1,7 +1,7 @@
 <template>
   <label class="search-bar">
     <input
-      v-model="searchString"
+      v-model="searchBarModel"
       class="search-bar__input"
       type="text"
       placeholder="Поиск товаров"
@@ -21,25 +21,26 @@
 import JmButton from '@/share/components/JmButton.vue';
 import { MagnifierIcon } from '@/share/components/icons';
 import { useProducts } from '@/catalog/composable/useProducts';
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useFilters } from '@/catalog/composable/useFilters';
 
 const { searchParams } = useProducts();
-const searchString = ref('');
+const { searchBarModel } = useFilters();
 const router = useRouter();
 const route = useRoute();
 
 onMounted(() => {
   const searchQueryParam = route.query['search'] as string | undefined;
-  if (searchQueryParam) {
-    searchString.value = searchQueryParam;
-    searchParams.searchString = searchQueryParam;
-  }
+  if (!searchQueryParam || !searchBarModel.value) return;
+  searchBarModel.value = searchQueryParam;
+  searchParams.searchString = searchQueryParam;
 });
 
 const changeHandler = () => {
-  router.push({ query: { ...route.query, search: searchString.value } });
-  searchParams.searchString = searchString.value;
+  if (!searchBarModel) return;
+  router.push({ query: { ...route.query, search: searchBarModel.value } });
+  searchParams.searchString = searchBarModel.value;
 };
 </script>
 
