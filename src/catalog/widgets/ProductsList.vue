@@ -23,7 +23,7 @@
       v-bind="$attrs"
     >
       <li
-        v-for="idx in 4"
+        v-for="idx in isLaptop || isTablet ? 2 : 3"
         :key="idx"
       >
         <ProductCardSceleton
@@ -41,8 +41,10 @@ import ProductCard from '@/catalog/blocks/ProductCard.vue';
 import ProductCardSceleton from '@/catalog/blocks/ProductCardSceleton.vue';
 import { controllerName } from '@/catalog/constants';
 import { useProducts } from '@/catalog/composable/useProducts';
+import { useBreackpoints } from '@/share/composable/useBreackpoints';
 
 const { products, isProductsFetching } = useProducts();
+const { isLaptop, isTablet } = useBreackpoints();
 
 const urlBase = `/${controllerName}/product`;
 </script>
@@ -54,9 +56,6 @@ const urlBase = `/${controllerName}/product`;
     display: grid;
     grid-template-columns: repeat(3, minmax(250px, 1fr));
     gap: $gap-base;
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
   }
 
   &__lnk {

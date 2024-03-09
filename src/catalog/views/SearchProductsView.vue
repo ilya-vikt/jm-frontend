@@ -99,6 +99,10 @@ onUnmounted(() => {
     flex: 0 0 clamp(300px, 30%, 500px);
   }
 
+  &__list {
+    flex-grow: 1;
+  }
+
   &__breadcrumbs {
     margin-bottom: $gap-base;
   }
