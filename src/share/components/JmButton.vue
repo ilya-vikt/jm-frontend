@@ -6,7 +6,7 @@
     :class="{
       'jm-button--vertical': vertical,
       'jm-button--bordered': hasBorder,
-      'jm-button--has-hover': hasHover,
+      'jm-button--has-hover': hasHover && !decorative,
       'jm-button--pushed': pushed
     }"
   >
