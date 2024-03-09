@@ -1,2 +1,2 @@
 export const categoriesMenuDroverName = 'categoriesMenu';
-export const FiltersPanelDroverName = 'filtersPanel';
+export const filtersPanelDroverName = 'filtersPanel';

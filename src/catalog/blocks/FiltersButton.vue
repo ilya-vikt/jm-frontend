@@ -3,6 +3,7 @@
     v-if="isCompact"
     class="header-default__catalog"
     has-hover
+    :pushed="openedDroverName === filtersPanelDroverName"
     icon-size="24"
     :icon="FilterIcon"
     @click="toggleFiltersPanel"
@@ -14,11 +15,12 @@ import { useBreackpoints } from '@/share/composable/useBreackpoints';
 import { useDroverController } from '@/share/composable/useDroverController';
 import { FilterIcon } from '@/share/components/icons';
 import JmButton from '@/share/components/JmButton.vue';
-import { FiltersPanelDroverName } from '@/catalog/constants';
-const { toggleDrover } = useDroverController();
+import { filtersPanelDroverName } from '@/catalog/constants';
+const { toggleDrover, openedDroverName } = useDroverController();
+
 const { isCompact } = useBreackpoints();
 
 const toggleFiltersPanel = () => {
-  toggleDrover(FiltersPanelDroverName);
+  toggleDrover(filtersPanelDroverName);
 };
 </script>

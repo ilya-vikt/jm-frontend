@@ -1,6 +1,6 @@
 <template>
   <JmDrover
-    :drover-name="FiltersPanelDroverName"
+    :drover-name="filtersPanelDroverName"
     class="filters-widget"
     :disabled="!isCompact"
   >
@@ -25,7 +25,7 @@
 import CategoriesPanel from '@/catalog/blocks/CategoriesPanel.vue';
 import FiltersPanel from '@/catalog/blocks/FiltersPanel.vue';
 import JmDrover from '@/share/components/JmDrover.vue';
-import { FiltersPanelDroverName } from '@/catalog/constants';
+import { filtersPanelDroverName } from '@/catalog/constants';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
 import SearchBar from '../blocks/SearchBar.vue';
 import CloseDroverButton from '@/share/blocks/CloseDroverButton.vue';

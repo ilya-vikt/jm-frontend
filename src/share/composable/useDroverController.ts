@@ -1,7 +1,7 @@
-import { reactive, readonly } from 'vue';
+import { reactive, readonly, ref } from 'vue';
 
 const registredDrovers = reactive<Record<string, boolean>>({});
-let openedDroverName: null | string = null;
+const openedDroverName = ref<null | string>(null);
 
 /**
  *
@@ -26,7 +26,7 @@ const registerDrover = (name: string): boolean => {
 const unregisterDrover = (name: string): boolean => {
   if (!registredDrovers.hasOwnProperty(name)) return false;
 
-  if (openedDroverName === name) {
+  if (openedDroverName.value === name) {
     closeDrover();
   }
 
@@ -44,12 +44,12 @@ const unregisterDrover = (name: string): boolean => {
 const openDrover = (name: string): boolean => {
   if (!registredDrovers.hasOwnProperty(name)) return false;
 
-  if (openedDroverName) {
-    registredDrovers[openedDroverName] = false;
+  if (openedDroverName.value) {
+    registredDrovers[openedDroverName.value] = false;
   }
 
   registredDrovers[name] = true;
-  openedDroverName = name;
+  openedDroverName.value = name;
   document.body.classList.add('no-scroll');
   return true;
 };
@@ -61,10 +61,10 @@ const openDrover = (name: string): boolean => {
  * The function closes the currently open drover
  */
 const closeDrover = (): boolean => {
-  if (!openedDroverName) return false;
+  if (!openedDroverName.value) return false;
 
-  registredDrovers[openedDroverName] = false;
-  openedDroverName = null;
+  registredDrovers[openedDroverName.value] = false;
+  openedDroverName.value = null;
   document.body.classList.remove('no-scroll');
   return true;
 };
@@ -79,7 +79,7 @@ const closeDrover = (): boolean => {
  */
 const toggleDrover = (name: string): boolean => {
   if (!registredDrovers.hasOwnProperty(name)) return false;
-  if (openedDroverName === name) {
+  if (openedDroverName.value === name) {
     closeDrover();
   } else {
     openDrover(name);
@@ -93,5 +93,6 @@ export const useDroverController = () => ({
   registerDrover,
   unregisterDrover,
   toggleDrover,
+  openedDroverName: readonly(openedDroverName),
   droversStates: readonly(registredDrovers)
 });
