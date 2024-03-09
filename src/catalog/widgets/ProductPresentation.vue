@@ -31,11 +31,10 @@
 import CardBase from '@/share/components/CardBase.vue';
 import ProductGallery from '@/catalog/blocks/ProductGallery.vue';
 import ProductFeatures from '@/catalog/blocks/ProductFeatures.vue';
-import { useProductById } from '@/catalog/composable/useProductById';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
 import { computed } from 'vue';
+import type { ProductByIdInput } from '@/catalog/types';
 
-const { product } = useProductById();
 const { isDesktop, isMobile } = useBreackpoints();
 
 const thumbPerView = computed(() => {
@@ -43,6 +42,10 @@ const thumbPerView = computed(() => {
   if (isMobile.value) return 2;
   return 3;
 });
+
+defineProps<{
+  product: ProductByIdInput | null;
+}>();
 
 defineSlots<{
   buyWidget(): any;
