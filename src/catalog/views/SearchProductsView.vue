@@ -32,7 +32,7 @@ import { controllerName } from '@/catalog/constants';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
 
 const { currentPrimaryCategoryId, currentSecondaryCategoryId, categories } = useCategories();
-const { products, isProductsFetching, refetchIsAllow } = useProducts();
+const { products, isProductsFetching, enableProductsFetch, disableProductsFetch } = useProducts();
 const { isCompact } = useBreackpoints();
 
 const getCrumbs = computed(() => {
@@ -79,11 +79,11 @@ onMounted(() => {
         : null;
   });
 
-  refetchIsAllow.value = true;
+  enableProductsFetch();
 });
 
 onUnmounted(() => {
-  refetchIsAllow.value = true;
+  disableProductsFetch();
   currentPrimaryCategoryId.value = null;
   currentSecondaryCategoryId.value = null;
 });

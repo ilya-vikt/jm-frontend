@@ -1,5 +1,5 @@
 import type { FilterValue, Product } from '@/catalog/types';
-import { reactive, ref, watchEffect } from 'vue';
+import { reactive, watchEffect, type WatchStopHandle } from 'vue';
 import { useFetch, watchDebounced } from '@vueuse/core';
 import { endpoints } from '@/catalog/constants';
 import { useFilters } from '@/catalog/composable/useFilters';
@@ -20,9 +20,7 @@ const searchParams = reactive<{
   categoryId: null
 });
 
-const refetchIsAllow = ref(false);
-
-const { filters } = useFilters();
+const { filters, searchBarModel } = useFilters();
 const { currentPrimaryCategoryId, currentSecondaryCategoryId } = useCategories();
 
 const {
@@ -34,6 +32,9 @@ const {
 })
   .post(searchParams)
   .json<Product[] | null>();
+
+let _categoryIdWatchStopHandle: WatchStopHandle | null = null;
+let _refetchWatchStopHandle: WatchStopHandle | null = null;
 
 const getQueryParams = () => {
   const params = searchParams.appliedFilters
@@ -56,27 +57,37 @@ const getQueryParams = () => {
   return params;
 };
 
-watchEffect(
-  () =>
-    (searchParams.categoryId =
-      currentSecondaryCategoryId.value ?? currentPrimaryCategoryId.value ?? null)
-);
+const enableProductsFetch = () => {
+  _categoryIdWatchStopHandle = watchEffect(() => {
+    searchParams.categoryId =
+      currentSecondaryCategoryId.value ?? currentPrimaryCategoryId.value ?? null;
+    searchParams.appliedFilters = null;
+    searchParams.searchString = '';
+    searchBarModel.value = '';
+  });
 
-watchDebounced(
-  searchParams,
-  () => {
-    if (!refetchIsAllow.value) return;
-    refetchProducts();
-  },
-  { debounce: 100 }
-);
+  _refetchWatchStopHandle = watchDebounced(
+    searchParams,
+    () => {
+      refetchProducts();
+    },
+    { debounce: 100, immediate: true }
+  );
+};
+
+const disableProductsFetch = () => {
+  _categoryIdWatchStopHandle && _categoryIdWatchStopHandle();
+  _refetchWatchStopHandle && _refetchWatchStopHandle();
+  products.value = null;
+};
 
 export const useProducts = () => {
   return {
     searchParams,
     products,
     isProductsFetching,
-    refetchIsAllow,
-    getQueryParams
+    getQueryParams,
+    enableProductsFetch,
+    disableProductsFetch
   };
 };
