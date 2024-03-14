@@ -11,11 +11,16 @@
     </div>
   </HeaderBase>
   <CategoriesMenu />
+  <MainMenu
+    v-if="isCompact"
+    :disabled="!isCompact"
+  />
 </template>
 
 <script setup lang="ts">
 import HeaderBase from '@/share/components/HeaderBase.vue';
 import HeaderNav from '@/share/blocks/HeaderNav.vue';
+import MainMenu from '@/share/blocks/MainMenu.vue';
 import { CategoriesMenu, SearchBar, CategoriesMenuButton, FiltersButton } from '@/catalog';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
 

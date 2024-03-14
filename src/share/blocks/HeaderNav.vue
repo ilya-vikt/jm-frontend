@@ -55,8 +55,9 @@
       :icon="BurgerIcon"
       :icon-size="24"
       vertical
-      to="/"
       has-hover
+      :pushed="openedDroverName === mainMenuDroverName"
+      @click="toggleDrover(mainMenuDroverName)"
     />
   </nav>
 </template>
@@ -71,6 +72,10 @@ import {
   UserIcon
 } from '@/share/components/icons';
 import JmButton from '@/share/components/JmButton.vue';
+import { useDroverController } from '@/share/composable/useDroverController';
+import { mainMenuDroverName } from '@/share/constants';
+
+const { toggleDrover, openedDroverName } = useDroverController();
 </script>
 
 <style scoped lang="scss">
