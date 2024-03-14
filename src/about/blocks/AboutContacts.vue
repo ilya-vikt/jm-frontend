@@ -1,6 +1,6 @@
 <template>
   <div class="about-contacts">
-    <h2>По вопросам сотрудничества со мной можно связаяться следующими способами</h2>
+    <h2>По&nbsp;вопросам сотрудничества со&nbsp;мной можно связаться следующими способами</h2>
     <ul class="about-contacts__list">
       <li>
         <OuterLink
@@ -65,5 +65,9 @@ import OuterLink from '@/about/components/OuterLink.vue';
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.is-mobile .about-contacts__list {
+  display: block;
 }
 </style>
