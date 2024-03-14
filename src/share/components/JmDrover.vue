@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { onMounted, onUnmounted, watch } from 'vue';
 import { useDroverController } from '@/share/composable/useDroverController';
 
 const { registerDrover, unregisterDrover, droversStates } = useDroverController();
@@ -40,9 +40,17 @@ watch(
     } else {
       registerDrover(props.droverName);
     }
-  },
-  { immediate: true }
+  }
 );
+
+onMounted(() => {
+  if (props.disabled) return;
+  registerDrover(props.droverName);
+});
+
+onUnmounted(() => {
+  unregisterDrover(props.droverName);
+});
 </script>
 
 <style scoped lang="scss">
