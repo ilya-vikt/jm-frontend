@@ -27,7 +27,6 @@ const props = withDefaults(
     disabled: false
   }
 );
-defineOptions();
 
 defineEmits<{
   closeDrover: [];
