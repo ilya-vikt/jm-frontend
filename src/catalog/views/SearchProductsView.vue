@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, watchEffect } from 'vue';
+import { computed, onMounted, onUnmounted, watch, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import ProductsList from '@/catalog/widgets/ProductsList.vue';
 import ProductsNotFound from '@/catalog/components/ProductsNotFound.vue';
@@ -30,9 +30,11 @@ import FiltersWidget from '@/catalog/widgets/FiltersWidget.vue';
 import CatalogBreadcrumbs from '@/catalog/blocks/CatalogBreadcrumbs.vue';
 import { controllerName } from '@/catalog/constants';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
+import { useFilters } from '../composable/useFilters';
 
 const { currentPrimaryCategoryId, currentSecondaryCategoryId, categories } = useCategories();
 const { products, isProductsFetching, enableProductsFetch, disableProductsFetch } = useProducts();
+const { searchParams } = useFilters();
 const { isCompact } = useBreackpoints();
 
 const getCrumbs = computed(() => {
@@ -62,6 +64,14 @@ const getCrumbs = computed(() => {
 
 onMounted(() => {
   const route = useRoute();
+
+  watch(
+    () => route.query.search,
+    () => {
+      searchParams.searchString = (route.query['search'] as string) ?? '';
+    },
+    { immediate: true }
+  );
 
   watchEffect(() => {
     const slug = route.params.primaryCategory;

@@ -1,5 +1,6 @@
 <template>
   <div class="product-view">
+    <FiltersWidget class="products__panel" />
     <CatalogBreadcrumbs
       v-if="!isCompact"
       :crumbs="getCrumbs"
@@ -25,6 +26,7 @@
 import ProductPresentation from '@/catalog/widgets/ProductPresentation.vue';
 import CardBase from '@/share/components/CardBase.vue';
 import CatalogBreadcrumbs from '@/catalog/blocks/CatalogBreadcrumbs.vue';
+import FiltersWidget from '@/catalog/widgets/FiltersWidget.vue';
 import { controllerName } from '@/catalog/constants';
 import { computed } from 'vue';
 import { useProductById } from '@/catalog/composable/useProductById';

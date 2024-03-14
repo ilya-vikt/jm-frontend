@@ -41,7 +41,7 @@ const router = createRouter({
     },
     {
       path: '/catalog',
-      name: 'cagalog',
+      name: 'catalog',
 
       component: () => import('@/catalog/views/SearchProductsView.vue'),
       meta: {

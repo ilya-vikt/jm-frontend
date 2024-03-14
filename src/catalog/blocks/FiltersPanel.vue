@@ -68,8 +68,8 @@ import { useRoute, useRouter } from 'vue-router';
 import { useFilters } from '@/catalog//composable/useFilters';
 import { prepareFilterValue } from '@/catalog//utils';
 import { onMounted, ref, watch } from 'vue';
-const { filters } = useFilters();
-const { searchParams, getQueryParams } = useProducts();
+const { filters, searchParams } = useFilters();
+const { getQueryParams } = useProducts();
 
 const filtersValues = ref<FilterValue[] | null>(null);
 

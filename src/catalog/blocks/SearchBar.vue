@@ -20,26 +20,24 @@
 <script setup lang="ts">
 import JmButton from '@/share/components/JmButton.vue';
 import { MagnifierIcon } from '@/share/components/icons';
-import { useProducts } from '@/catalog/composable/useProducts';
-import { onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, type RouteLocationRaw } from 'vue-router';
 import { useFilters } from '@/catalog/composable/useFilters';
 
-const { searchParams } = useProducts();
-const { searchBarModel } = useFilters();
+const { searchParams, searchBarModel } = useFilters();
 const router = useRouter();
 const route = useRoute();
 
-onMounted(() => {
-  const searchQueryParam = route.query['search'] as string | undefined;
-  if (!searchQueryParam || !searchBarModel.value) return;
-  searchBarModel.value = searchQueryParam;
-  searchParams.searchString = searchQueryParam;
-});
-
 const changeHandler = () => {
   if (!searchBarModel) return;
-  router.push({ query: { ...route.query, search: searchBarModel.value } });
+  const location: RouteLocationRaw = {
+    query: { ...route.query, search: searchBarModel.value }
+  };
+
+  if (!['primaryCategory', 'secondaryCategory'].includes(route.name as string)) {
+    location['name'] = 'catalog';
+  }
+
+  router.push(location);
   searchParams.searchString = searchBarModel.value;
 };
 </script>

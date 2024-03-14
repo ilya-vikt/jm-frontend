@@ -1,11 +1,29 @@
-import type { FitlersByCategoryInput } from '@/catalog/types';
+import type { FilterValue, FitlersByCategoryInput } from '@/catalog/types';
 import { endpoints } from '@/catalog/constants';
 import { useCategories } from '@/catalog/composable/useCategories';
-import { computed, ref } from 'vue';
+import { computed, reactive, ref, watchEffect } from 'vue';
 import { useFetch } from '@vueuse/core';
 
 const { currentSecondaryCategoryId } = useCategories();
+
+const searchParams = reactive<{
+  searchString: string;
+  appliedFilters:
+    | {
+        id: number;
+        value: NonNullable<FilterValue>;
+      }[]
+    | null;
+  categoryId: number | null;
+}>({
+  searchString: '',
+  appliedFilters: null,
+  categoryId: null
+});
+
 const searchBarModel = ref('');
+watchEffect(() => (searchBarModel.value = searchParams.searchString));
+
 /**
  * @prop {string} filtersUrl contains the calculated URL for requesting filters from the backend.
  * If the URL cannot be calculated due to a missing secondaryCategory or because
@@ -32,6 +50,7 @@ export const useFilters = () => {
   return {
     filters,
     isFilterFetching,
-    searchBarModel
+    searchBarModel,
+    searchParams
   };
 };

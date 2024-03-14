@@ -47,6 +47,7 @@ const { isCompact } = useBreackpoints();
 .is-compact {
   .header-default {
     display: flex;
+    gap: initial;
   }
 }
 </style>

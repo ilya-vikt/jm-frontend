@@ -1,26 +1,11 @@
-import type { FilterValue, Product } from '@/catalog/types';
-import { reactive, watchEffect, type WatchStopHandle } from 'vue';
+import type { Product } from '@/catalog/types';
+import { watchEffect, type WatchStopHandle } from 'vue';
 import { useFetch, watchDebounced } from '@vueuse/core';
 import { endpoints } from '@/catalog/constants';
 import { useFilters } from '@/catalog/composable/useFilters';
 import { useCategories } from '@/catalog/composable/useCategories';
 
-const searchParams = reactive<{
-  searchString: string;
-  appliedFilters:
-    | {
-        id: number;
-        value: NonNullable<FilterValue>;
-      }[]
-    | null;
-  categoryId: number | null;
-}>({
-  searchString: '',
-  appliedFilters: null,
-  categoryId: null
-});
-
-const { filters, searchBarModel } = useFilters();
+const { filters, searchParams, searchBarModel } = useFilters();
 const { currentPrimaryCategoryId, currentSecondaryCategoryId } = useCategories();
 
 const {
@@ -61,9 +46,6 @@ const enableProductsFetch = () => {
   _categoryIdWatchStopHandle = watchEffect(() => {
     searchParams.categoryId =
       currentSecondaryCategoryId.value ?? currentPrimaryCategoryId.value ?? null;
-    searchParams.appliedFilters = null;
-    searchParams.searchString = '';
-    searchBarModel.value = '';
   });
 
   _refetchWatchStopHandle = watchDebounced(
@@ -79,11 +61,14 @@ const disableProductsFetch = () => {
   _categoryIdWatchStopHandle && _categoryIdWatchStopHandle();
   _refetchWatchStopHandle && _refetchWatchStopHandle();
   products.value = null;
+  searchParams.appliedFilters = null;
+  searchParams.categoryId = null;
+  searchParams.searchString = '';
+  searchBarModel.value = '';
 };
 
 export const useProducts = () => {
   return {
-    searchParams,
     products,
     isProductsFetching,
     getQueryParams,
