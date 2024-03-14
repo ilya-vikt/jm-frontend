@@ -7,6 +7,24 @@
   letter-spacing: 0.01em;
   --scrollbar-compensation: 0px;
   --header-height: 0px;
+
+  /**
+  * calculate responsive font-size depends on screen width
+  *
+  * font-size = maxFontsize + (maxFontsize - minFontsize) / (maxWidth - minWidth) * (currentWidth - maxWidth)
+  *
+  * maxFontsize = 18px;
+  * minFontsize = 14px
+  * maxWidth = 1920px;
+  * minWidth = 640px;
+  */
+  @media (max-width: 1920px) {
+    font-size: calc(12px + 0.003125 * 100vw);
+  }
+
+  @media (max-width: 640px) {
+    font-size: 14px;
+  }
 }
 body {
   min-height: 100vh;
