@@ -1,5 +1,5 @@
 <template>
-  <ProductsList class="" />
+  <ProductsList class="products-list" />
 </template>
 
 <script setup lang="ts">
@@ -16,3 +16,9 @@ onUnmounted(() => {
   disableProductsFetch();
 });
 </script>
+<style scoped lang="scss">
+.products-list {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+</style>
