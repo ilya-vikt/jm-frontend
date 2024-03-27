@@ -22,13 +22,20 @@
 import JmButton from '@/share/components/JmButton.vue';
 import { useCategories } from '@/catalog/composable/useCategories';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
+import { useDroverController } from '@/share/composable/useDroverController';
 
+const { closeDrover } = useDroverController();
 const { primaryCategories, primaryId } = useCategories();
 const { isCompact } = useBreackpoints();
 
 const selectHandler = (id: number, e: 'hover' | 'click') => {
   if ((isCompact.value && e === 'click') || (!isCompact.value && e === 'hover')) {
     primaryId.value = id;
+    return;
+  }
+
+  if (!isCompact.value && e === 'click') {
+    closeDrover();
   }
 };
 </script>
