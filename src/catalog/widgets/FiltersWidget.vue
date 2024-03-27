@@ -8,7 +8,10 @@
       v-if="isCompact"
       class="filters-widget__top"
     >
-      <SearchBar class="filters-widget__search-bar" />
+      <SearchBar
+        class="filters-widget__search-bar"
+        @search="closeDrover"
+      />
       <CloseDroverButton class="filters-widget__close" />
     </div>
     <FiltersPanel
@@ -27,11 +30,13 @@ import FiltersPanel from '@/catalog/blocks/FiltersPanel.vue';
 import JmDrover from '@/share/components/JmDrover.vue';
 import { filtersPanelDroverName } from '@/catalog/constants';
 import { useBreackpoints } from '@/share/composable/useBreackpoints';
-import SearchBar from '../blocks/SearchBar.vue';
+import SearchBar from '@/catalog/blocks/SearchBar.vue';
 import CloseDroverButton from '@/share/blocks/CloseDroverButton.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useDroverController } from '@/share/composable/useDroverController';
 
+const { closeDrover } = useDroverController();
 const { isCompact } = useBreackpoints();
 
 const categoriesPanelVisible = computed(() =>

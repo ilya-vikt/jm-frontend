@@ -68,6 +68,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { useFilters } from '@/catalog//composable/useFilters';
 import { prepareFilterValue } from '@/catalog//utils';
 import { onMounted, ref, watch } from 'vue';
+import { useDroverController } from '@/share/composable/useDroverController';
+
+const { closeDrover } = useDroverController();
 const { filters, searchParams } = useFilters();
 const { getQueryParams } = useProducts();
 
@@ -121,6 +124,7 @@ const applyFilters = () => {
   router.replace({
     query: getQueryParams()
   });
+  closeDrover();
 };
 
 const router = useRouter();
@@ -142,6 +146,7 @@ const resetFilters = async () => {
     query: searchParams.searchString ? { search: searchParams.searchString } : {}
   });
   initFiltersValues();
+  closeDrover();
 };
 
 onMounted(() => {

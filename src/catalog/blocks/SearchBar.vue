@@ -23,6 +23,10 @@ import { MagnifierIcon } from '@/share/components/icons';
 import { useRoute, useRouter, type RouteLocationRaw } from 'vue-router';
 import { useFilters } from '@/catalog/composable/useFilters';
 
+const emits = defineEmits<{
+  search: [];
+}>();
+
 const { searchParams, searchBarModel } = useFilters();
 const router = useRouter();
 const route = useRoute();
@@ -39,6 +43,7 @@ const changeHandler = () => {
 
   router.push(location);
   searchParams.searchString = searchBarModel.value;
+  emits('search');
 };
 </script>
 
