@@ -6,7 +6,7 @@ const prepareNumber = (value: string | undefined, minVal: number, maxVal: number
   }
 
   const tmp = value.split(',');
-  return tmp.length === 2 && Number.isInteger(+tmp[0]) && Number.isInteger(+tmp[1])
+  return tmp.length === 2 && !isNaN(+tmp[0]) && !isNaN(+tmp[1])
     ? [Math.max(+tmp[0], minVal), Math.min(+tmp[1], maxVal)]
     : [minVal, maxVal];
 };
